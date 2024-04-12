@@ -1,0 +1,27 @@
+#productAutoComplete{
+    background: #cccccc;
+    position: relative;
+    top: -29px;
+    left: 127px;
+    width: 190px;
+    /*display: none;*/
+}
+
+#productAutoList{
+    margin: 0;
+    padding: 0;
+    border: 1px solid #aaaaaa;
+}
+
+.productAutoItem{
+    list-style: none;
+    height: 20px;
+    line-height: 20px;
+    font-size: 10px;
+    text-align: left;
+    padding-left: 5px;
+    margin-top: 3px;
+    border-bottom: 1px solid #333333;
+    color: #1c6299;
+    cursor: pointer;
+}
