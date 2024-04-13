@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="~{common/top}"></header>
+
+<script type="text/javascript">
+  function refreshCode(){
+    let captcha=document.getElementById("captcha");
+    captcha.src="${pageContext.request.contextPath}/checkCodeServlet?time="+new Date().getTime();
+  }
+</script>
+
+<div id="Catalog" style="background-color: white;">
+  <form th:action="login" th:method="post">
+    <p>Please enter your username and password.</p>
+    <a th:if="${signOnMsg != null}">
+      <p> <font color="red" th:text="${signOnMsg}"></font> </p>
+    </a>
+    <p>
+      Username:<input type="text" name="username" value="j2ee"> <br />
+      Password:<input type="password" name="password" value="j2ee"><br/>
+<!--      VerificationCode:<input type="text" name="vCode" size="5" maxlength="4"/>-->
+<!--      <a href="signon"><img border="0" src="verificationCode" name="checkcode"></a>-->
+    </p>
+    <input type="submit" value="Login">
+  </form>
+  Need a username and password?
+  <a href="/account/newAccountForm">Register Now!</a>
+
+</div>
+
+<footer th:replace="~{common/bottom}"></footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<header th:replace="~{common/top}"></header>
+<div id="Catalog" style="background-color: white;">
+  <form action="newAccount" method="post">
+
+    <h3>User Information</h3>
+
+    <table>
+      <tr>
+        <td>User ID:</td>
+        <td>
+          <input type="text" name="username" id="username" onblur="usernameIsExist();">
+          <div id="usernameMsg"></div>
+          <script type="text/javascript" src="${pageContext.request.contextPath }/js/usernameIsExist.js"></script>
+        </td>
+      </tr>
+      <tr>
+        <td>New password:</td>
+        <td><input type="text" name="password"></td>
+      </tr>
+      <tr>
+        <td>Repeat password:</td>
+        <td><input type="text" name="repeatedPassword"></td>
+      </tr>
+      <div  th:if="${message}" th:text="${message}">
+      </div>
+<!--      <tr>-->
+<!--        <td>VerificationCode:</td>-->
+<!--        <td>-->
+<!--          <input type="text" name="vCode" size="5" maxlength="4"/>-->
+<!--          <a href="newAccount"><img border="0" src="verificationCode" name="checkcode"></a>-->
+<!--        </td>-->
+<!--      </tr>-->
+    </table>
+    <div th:replace="~{account/IncludeAccountFields::111}"></div>
+
+    <input th:type="submit" th:name="newAccount" value="Save Account Information">
+
+  </form>
+</div>
+<footer th:replace="~{common/bottom}"></footer>
+</body>
+</html>
