@@ -1,5 +1,6 @@
 package org.csu.mypetstore.controller;
 
+import org.csu.mypetstore.entity.Product;
 import org.csu.mypetstore.service.CatalogService;
 import org.csu.mypetstore.vo.CategoryVO;
 import org.csu.mypetstore.vo.ItemVO;
@@ -7,8 +8,9 @@ import org.csu.mypetstore.vo.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/catalog")
@@ -42,4 +44,16 @@ public class CatalogController {
         model.addAttribute("item", itemVO);
         return "catalog/item";
     }
+
+    @PostMapping("searchProducts")
+    public String viewSearchProducts(@RequestParam("keyword") String keyword, Model model) {
+        if (keyword != null) {
+            List<Product> kProductList =  catalogService.searchProductList(keyword);
+            model.addAttribute("kProductList", kProductList);
+        }
+
+        return "catalog/searchProducts";
+    }
+
+
 }

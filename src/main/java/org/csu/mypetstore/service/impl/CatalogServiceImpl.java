@@ -68,7 +68,7 @@ public class CatalogServiceImpl implements CatalogService {
 
     @Override
     public ItemVO getItem(String itemId) {
-        ItemVO itemVO = new ItemVO();
+        org.csu.mypetstore.vo.ItemVO itemVO = new ItemVO();
         Item item = itemMapper.selectById(itemId);
         Product product = productMapper.selectById(item.getProductId());
         ItemQuantity itemQuantity = itemQuantityMapper.selectById(itemId);
@@ -78,12 +78,19 @@ public class CatalogServiceImpl implements CatalogService {
         itemVO.setAttributes(item.getAttribute1());
         itemVO.setProductId(product.getProductId());
         itemVO.setProductName(product.getName());
-        //itemVO.setDescription(product.getDescription());
+        itemVO.setStatus(item.getStatus());
         String [] temp = product.getDescription().split("\"");
         itemVO.setDescriptionImage(temp[1]);
         itemVO.setDescriptionText(temp[2].substring(1));
 
         itemVO.setQuantity(itemQuantity.getQuantity());
         return itemVO;
+    }
+
+    @Override
+    public List<Product> searchProductList(String keyword) {
+        QueryWrapper<Product> queryWrapper=new QueryWrapper<>();
+        queryWrapper.like("name",keyword.toLowerCase());
+        return productMapper.selectList(queryWrapper);
     }
 }

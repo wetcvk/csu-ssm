@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="~{common/top}">
+</header>
+<div id="Content">
+    <div id="BackLink">
+        <a href="/catalog/index">Return to Main Menu</a>
+    </div>
+    <div id="Catalog">
+        <div id="Cart">
+            <h2>Shopping Cart</h2>
+            <form action="/cart/cartData" method="post"><!--这边就是返回全部购物车的信息--->
+                <table>
+                    <tr>
+                        <th><b>Item ID</b></th>
+                        <th><b>Product ID</b></th>
+                        <th><b>Description</b></th>
+                        <th><b>In Stock?</b></th>
+                        <th><b>Quantity</b></th>
+                        <th><b>listPrice</b></th>
+                        <th><b>Total Cost</b></th>
+                        <th><b>Option</b></th>
+                    </tr>
+                    <!-- 判断 -->
+                    <tr th:if="${#lists.isEmpty(session.ItemList)}">
+                        <td colspan="8"><b>Your cart is empty.</b></td>
+                    </tr>
+                    <!-- 循环 -->
+                    <tr th:each="item : ${session.ItemList}" th:if="${not #lists.isEmpty(session.ItemList)}" th:id="'tr'+${item.itemId}">
+                        <td><a th:href="@{'/cart/Item?itemId='+${item.itemId}}"
+                               th:text="${item.itemId}">EST-16</a></td>
+                        <td th:text="${item.productId}">FL-DLH-02</td>
+                        <td th:text="${item.attributes}">Adult Female Persian</td>
+                        <td th:text="${item.status}">in sale</td>
+                        <td ><input
+                                th:id="${item.itemId}+'number'" type="text" size="3" name="" value="1"
+                                onblur="changeNumber(this)"
+                        /></td>
+                        <td th:text="${item.listPrice}">$93.50</td>
+                        <td th:text="${item.listPrice}" th:id="${item.itemId}+'ListTotalPrice'">$93.50</td>
+                        <td><a th:id="${item.itemId}"  class="Button" onclick="removeItem(this)">Remove</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">Sub Total: <!-- 判断 -->
+                            <a th:text="${session.totalnumber}" id="totalnumber"></a>
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </form>
+
+            <!-- 需要判断是否登录 -->
+
+            <a th:if="${session.account!=null}" href="/order/NewOrderForm">Proceed to Checkout</a>
+            <a th:if="${session.account==null}" href="/account/signon">Proceed to Checkout</a>
+        </div>
+
+        <div id="MyList">
+            <!-- 判断 -->
+            <include file="includeMyList.html"></include>
+        </div>
+
+        <div id="Separator">&nbsp;</div>
+    </div>
+
+</div>
+<footer th:replace="~{common/bottom}">
+
+</footer>
+</body>
+<script>
+    function removeItem(obj) {
+        //remove按钮的id就是item的id
+        //发送后端，session中移除成功的话，就将整个列删除 tr+itemid 表示该列id
+        //这边还有一些问题
+        $.get("/cart/cartDataRemove",//url
+            {
+                removeId: obj.id
+            }, function (data) {
+                var resultobj = eval('(' + data + ')');
+                if (resultobj.RemoveResult == 'true') {//移除成功
+                    var trid='tr'+obj.id;
+                    var tr = $('#'+trid);
+                    tr.remove();
+                    $("#totalnumber").text(resultobj.totalnumber);
+                } else {
+                    alert("移除失败");
+                }
+            });
+    }
+    //设置购物车商品数目
+    function changeNumber(obj){
+        var id = obj.id.replace('number','');
+        var $obj = $(obj);
+        $.get("/cart/cartDataChangeNumber",//url
+            {
+                ChangeNumberItemId: id,
+                Number:$obj.val()
+            }, function (data) {
+                //do nothing
+                var resultobj = eval('(' + data + ')');
+                if (resultobj.ChangeNumberResult == 'success') {
+                    //改变数量成功,刷新界面控件显示
+                    $("#totalnumber").text(resultobj.totalnumber);
+                    $("#"+id+"ListTotalPrice").text(resultobj.listPrice);
+                }else{
+                    //do nothing,failed
+                }
+            });
+    }
+
+</script>
+</html>

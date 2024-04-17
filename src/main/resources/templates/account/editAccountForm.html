@@ -110,7 +110,7 @@
 
     </form>
     <!--event="listOrders-->
-    <a href="viewListOrder?username=${sessionScope.account.username}">My Orders</a>
+    <a th:href="'/order/listOrders?username='+${account.username}">My Orders</a>
 </div>
 
 <footer th:replace="~{common/bottom}"></footer>

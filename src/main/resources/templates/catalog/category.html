@@ -6,7 +6,7 @@
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
 </head>
 <body>
-<header th:replace="common/top"></header>
+<header th:replace="~{common/top}"></header>
 <div id="Content">
     <div id="BackLink">
         <a href="/catalog/index">Return to Main Menu</a>
@@ -30,6 +30,6 @@
         </table>
     </div>
 </div>
-<footer th:replace="common/bottom"></footer>
+<footer th:replace="~{common/bottom}"></footer>
 </body>
 </html>

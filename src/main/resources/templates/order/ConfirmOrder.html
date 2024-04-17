@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<body>
+
+<header th:replace="~{common/top}">
+</header>
+<div id="Content">
+
+    <div id="BackLink">
+        <a href="/catalog/main">Return to Main Menu</a>
+    </div>
+
+    <div id="Catalog">
+        <table>
+            <tbody>
+            <tr>
+                <th align="center" colspan="2"><font size="4"><b>Order</b></font>
+                    <br> <font size="3" th:text="${order.orderDate}"><b> 2014/03/23 10:46:43</b></font></th>
+            </tr>
+
+            <tr>
+                <th colspan="2">Billing Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${order.billToFirstName}">ABC</td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td  th:text="${order.billToLastName}">XYX</td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td th:text="${order.billAddress1}">901 San Antonio Road</td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td th:text="${order.billAddress2}">MS UCUP02-206</td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td th:text="${order.billCity}">Palo Alto</td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td  th:text="${order.billState}">CA</td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td th:text="${order.billZip}">94303</td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td th:text="${order.billCountry}">USA</td>
+            </tr>
+            <tr>
+                <th colspan="2">Shipping Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td  th:text="${order.billToFirstName}">ABC</td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td  th:text="${order.billToLastName}">XYX</td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td  th:text="${order.billAddress1}">901 San Antonio Road</td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td  th:text="${order.billAddress2}">MS UCUP02-206</td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td  th:text="${order.billCity}">Palo Alto</td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td  th:text="${order.billState}">CA</td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td th:text="${order.billZip}">94303</td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td  th:text="${order.billCountry}">USA</td>
+            </tr>
+
+            </tbody>
+        </table>
+
+
+        <a class="Button"
+           href="/order/ViewOrder">Confirm</a>
+    </div>
+
+</div>
+<footer th:replace="~{common/bottom}">
+
+</footer>
+
+</body>
+</html>

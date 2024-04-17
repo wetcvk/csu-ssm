@@ -6,6 +6,7 @@
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
 </head>
 <body>
+<script src="/js/jquery-3.7.1.js"></script>
 <header th:fragment="header">
     <div id="Header">
         <div id="Logo">
@@ -16,7 +17,7 @@
 
         <div id="Menu">
             <div id="MenuContent">
-                <a href="/cart/viewCart"><img align="middle" name="img_cart" src="../images/cart.gif" /></a>
+                <a href="/cart/getCart"><img align="middle" name="img_cart" src="../images/cart.gif" /></a>
                 <img align="middle" src="../images/separator.gif" />
                 <a th:if="${session.account} == null" href="/account/signon">Sign In</a>
 <!--                <a th:if="(${session.account} != null) and (${!session.authenticated}) " href="/account/signon">Sign In</a>-->

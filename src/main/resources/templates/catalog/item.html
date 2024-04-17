@@ -6,7 +6,7 @@
     <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
 </head>
 <body>
-<header th:replace="common/top"></header>
+<header th:replace="~{common/top}"></header>
 <div id="Content">
     <div id="BackLink">
         <a th:href="'/catalog/viewProduct?productId='+${item.productId}">
@@ -44,11 +44,13 @@
                 <td th:text="'$'+${#numbers.formatDecimal(item.listPrice,1,2)}">Item List Price</td>
             </tr>
             <tr>
-                <td><a th:href="'/cart/addItemToCart?workingItemId='+${item.itemId}" >Add to Cart</a></td>
+                <td>
+                    <a class="Button" th:href="@{' /cart/cart?itemId='+${item.itemId}}">Add to Cart</a>
+                </td>
             </tr>
         </table>
     </div>
 </div>
-<footer th:replace="common/bottom"></footer>
+<footer th:replace="~{common/bottom}"></footer>
 </body>
 </html>

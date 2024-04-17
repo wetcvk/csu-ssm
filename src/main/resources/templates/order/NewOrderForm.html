@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<body>
+
+<header th:replace="~{common/top}">
+</header>
+<div id="Content">
+
+    <div id="Catalog">
+        <form action="/order/ConfirmOrder" th:object="${order}"  method="post">
+            <table>
+                <tbody><tr>
+                    <th colspan="2">Payment Details</th>
+                </tr>
+                <tr>
+                    <td>Card Type:</td>
+                    <td><select th:field="*{cardType}" th:value="order.cardType">
+                        <option selected="selected" value="Visa">Visa</option><option value="MasterCard">MasterCard</option><option value="American Express">American Express</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td>Card Number:</td>
+                    <td><input th:field="*{creditCard}"  th:value="order.creditCard" value="999 999 999" type="text"> * Use a fake
+                        number!</td>
+                </tr>
+                <tr>
+                    <td>Expiry Date (MM/YY):</td>
+                    <td><input th:field="*{expiryDate}" th:value="order.expiryDate" value="12/03" type="text"></td>
+                </tr>
+                <tr>
+                    <th colspan="2">Billing Address</th>
+                </tr>
+
+                <tr>
+                    <td>First name:</td>
+                    <td><input th:field="*{billToFirstName}"  name="order.billToFirstName"
+                               th:value="${order.billToFirstName}" type="text"></td>
+                </tr>
+                <tr>
+                    <td>Last name:</td>
+                    <td><input th:field="*{billToLastName}"  name="order.billToLastName"
+                               th:value="${session.account.lastName}" type="text"></td>
+                </tr>
+                <tr>
+                    <td>Address 1:</td>
+                    <td><input th:field="*{billAddress1}"  name="order.billAddress1"
+                               th:value="${order.billAddress1}" type="text" size="40"></td>
+                </tr>
+                <tr>
+                    <td>Address 2:</td>
+                    <td><input th:field="*{billAddress2}"  name="order.billAddress2"
+                               th:value="${order.billAddress2}" type="text" size="40"></td>
+                </tr>
+                <tr>
+                    <td>City:</td>
+                    <td><input th:field="*{billCity}"  name="order.billCity"
+                               th:value="${order.billCity}" type="text"></td>
+                </tr>
+                <tr>
+                    <td>State:</td>
+                    <td><input th:field="*{billState}"  name="order.billState"
+                               th:value="${order.billState}" type="text" size="4"></td>
+                </tr>
+                <tr>
+                    <td>Zip:</td>
+                    <td><input th:field="*{billZip}"  name="order.billZip"
+                               th:value="${order.billZip}" type="text" size="10"></td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td><input  th:field="*{billCountry}" name="order.billCountry"
+                                th:value="${order.billCountry}" type="text" size="15"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><input  name="shippingAddressRequired" value="true" type="checkbox">
+                        Ship to different address...</td>
+                </tr>
+
+                </tbody></table>
+            <input  name="newOrder" value="Continue" type="submit">
+        </form>
+    </div>
+
+</div>
+<footer th:replace="~{common/bottom}">
+
+</footer>
+
+
+</body>
+</html>
